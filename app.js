@@ -5,12 +5,14 @@ document.getElementById('loan-form').addEventListener('submit', function(event){
     document.getElementById('results').style.display = 'none'
     // showing loader gif
     document.getElementById('loading').style.display = 'block'
+    setTimeout(calculateResults, 2000)
     event.preventDefault()
 })
 
 // Calculate results 
-function calculateResults(event){
+function calculateResults(){
     console.log('Calculating...');
+    const amount = document.getElementById('amount')
     const interest = document.getElementById('interest')
     const years = document.getElementById('years')
     const monthlyPayment = document.getElementById('monthly-payment')
@@ -31,6 +33,10 @@ function calculateResults(event){
         monthlyPayment.value = monthly.toFixed(2)
         totalPayment.value = (monthly * calculatedPayments).toFixed(2)
         totalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2)
+        // hiding the results
+    document.getElementById('results').style.display = 'block'
+    // hiding the loading gif 
+        document.getElementById('loading').style.display = 'none'
     } else {
         // creating custom function
         showError('Please check your numbers.')
@@ -39,6 +45,10 @@ function calculateResults(event){
 
 // Show a popup error made entirely with JS
 function showError(error){
+// hiding the results
+    document.getElementById('results').style.display = 'none'
+// hiding the loading gif 
+    document.getElementById('loading').style.display = 'none'
 // creating a div
     const errorDiv = document.createElement('div')
 // get elements
