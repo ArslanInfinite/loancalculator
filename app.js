@@ -30,3 +30,25 @@ if(isFinite(monthly)) {
 }
     event.preventDefault()
 }
+
+// Show a popup error made entirely with JS
+function showError(error){
+// creating a div
+    const errorDiv = document.createElement('div')
+// get elements
+    const card = document.querySelector('.card')
+    const heading = document.querySelector('.heading')
+// setting a class name for the div 
+    errorDiv.className = 'alert alert-danger'
+// create textnode and append to the div 
+    errorDiv.appendChild(document.createTextNode(error))
+// insert error above heading, this is called on a parent and the element to put in is passed in
+    card.insertBefore(errorDiv, heading)
+// clear the error message after a certain period of time, called on the window element
+// setTimeout() takes two parameters, a function and the timer 
+    setTimeout(clearError, 3000)
+}
+
+function clearError(){
+    document.querySelector('.alert').remove()
+}
