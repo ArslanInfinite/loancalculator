@@ -1,5 +1,12 @@
 // Listen for submit event on calculate button
-document.getElementById('loan-form').addEventListener('submit', calculateResults)
+document.getElementById('loan-form').addEventListener('submit', function(event){
+    // delaying calculateResults
+    // hiding results 
+    document.getElementById('results').style.display = 'none'
+    // showing loader gif
+    document.getElementById('loading').style.display = 'block'
+    event.preventDefault()
+})
 
 // Calculate results 
 function calculateResults(event){
@@ -20,15 +27,14 @@ function calculateResults(event){
     const x = Math.pow(1 + calculatedInterest, calculatedPayments)
     const monthly = (principal * x * calculatedInterest) / (x - 1)
 // 
-if(isFinite(monthly)) {
-    monthlyPayment.value = monthly.toFixed(2)
-    totalPayment.value = (monthly * calculatedPayments).toFixed(2)
-    totalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2)
-} else {
-    // creating custom function
-    showError('Please check your numbers.')
-}
-    event.preventDefault()
+    if(isFinite(monthly)) {
+        monthlyPayment.value = monthly.toFixed(2)
+        totalPayment.value = (monthly * calculatedPayments).toFixed(2)
+        totalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2)
+    } else {
+        // creating custom function
+        showError('Please check your numbers.')
+    }
 }
 
 // Show a popup error made entirely with JS
